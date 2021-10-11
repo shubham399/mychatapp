@@ -1,35 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import Message from './Components/Message'
+//@ts-ignore
+import * as rug from 'random-username-generator'
 
-// const selfMessage = "d-flex flex-row justify-content-end mb-4"
+const selfMessage = "d-flex flex-row justify-content-end mb-4"
 const otherMessage = "d-flex flex-row justify-content-start mb-4"
+
+type UserMessage = {
+  message: string,
+  userName: string
+}
 
 function App() {
   const [socket, setSocket] = useState<any>(null);
-  const [message, setMessage] = useState<string[]>([
-  ]);
+  const [userName, setUserName] = useState<string>("")
+  const [message, setMessage] = useState<UserMessage[]>([]);
   const [currentMessage, setcurrentMessage] = useState<string>("")
   //@ts-ignore
   useEffect(() => {
     const newSocket = io(`http://localhost:3000`);
+    setUserName(rug.generate())
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
   //@ts-ignore
   useEffect(() => {
-    if (socket) {
-      socket.on("message", (incomingMessage: string) => {
-        setMessage([...message, incomingMessage])
-        console.log("New Message", message)
+    if (socket)
+      socket.on("message", (incomingMessage: UserMessage) => {
+        setMessage([...message.slice(-10), incomingMessage])
       })
-    }
-  }, []);
+  }, [socket, message]);
+
+
   function onMessageChange(e: any) {
     setcurrentMessage(e.target.value)
   }
   function handleForm(e: any) {
     e.preventDefault();
+    let userMessage: UserMessage = {
+      userName: userName,
+      message: currentMessage
+    }
+    socket.emit("message", userMessage)
+    setMessage([...message.slice(-10), userMessage])
     setcurrentMessage("")
     e.target.value = null;
   }
@@ -43,7 +57,8 @@ function App() {
             <div className="card" id="chat1">
               <div className="card-body">
                 {message.map(m => {
-                  return (<Message css={otherMessage} message={m} />)
+                  let css = m.userName === userName ? selfMessage : otherMessage
+                  return (<Message css={css} message={m.message} />)
                 })}
                 {/* <Message css={selfMessage} message="I Sent this" /> */}
                 <div className="form-outline" >
