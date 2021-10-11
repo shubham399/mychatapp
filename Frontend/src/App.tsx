@@ -55,7 +55,7 @@ function App() {
           <div > {/* className="col-md-8 col-lg-6 col-xl-4" */}
 
             <div className="card" id="chat1">
-              <div className="card-body">
+              <div className="card-body overflow-auto">
                 {message.map(m => {
                   let css = m.userName === userName
                   return (<Message align={css} message={m.message} userName={m.userName} />)
