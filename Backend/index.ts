@@ -24,7 +24,7 @@ io.on("connection", function (socket: any) {
     //  socket.broadcast.to(user.room)
     console.log("a user connected");
     socket.join("general")
-    socket.emit("message", { message: "A New User Joined the Room", "userName": "admin" })
+    socket.broadcast.to("general").emit("message", { message: "A New User Joined the Room", "userName": "admin" })
     // whenever we receive a 'message' we log it out
     socket.on("message", function (message: UserMessage) {
         console.log("Got Message", message);

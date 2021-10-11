@@ -1,23 +1,27 @@
 body {
-    background: rgb(27, 24, 24) !important;
+    background: #2A0944 !important;
 }
 
 div {
-    background: rgb(27, 24, 24) !important;
+    background: #2A0944 !important;
 }
 
 .card * {
-    background: rgb(37, 32, 32) !important;
+    background: #3B185F !important;
 }
 
 .cardboard * {
-    background: rgb(49, 43, 43) !important;
+    background: #A12568 !important;
 }
 
 p {
-    color: white !important;
+    color: #FEC260 !important;
+}
+
+form {
+    background: #3B185F !important;
 }
 
 input {
-    color: white !important;
+    color: #FEC260 !important;
 }
