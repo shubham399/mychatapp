@@ -2,7 +2,7 @@
   "name": "mychatapp",
   "scripts": {},
   "env": {
-  "PROJECT_PATH":"Backend"},
+  "PROJECT_PATH":{"value":"Backend"}},
   "formation": {
     "web": {
       "quantity": 1
