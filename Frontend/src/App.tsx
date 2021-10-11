@@ -17,7 +17,7 @@ function App() {
   //@ts-ignore
   useEffect(() => {
     //@ts-ignore
-    const newSocket = io(BACKEND_HOST);
+    const newSocket = io(REACT_APP_BACKEND_HOST);
     setUserName(rug.generate())
     setSocket(newSocket);
     return () => newSocket.close();
