@@ -8,7 +8,7 @@ type UserMessage = {
   message: string,
   userName: string
 }
-
+const hostname = process.env.BACKEND_HOST ||"http://localhost:3000"
 function App() {
   const [socket, setSocket] = useState<any>(null);
   const [userName, setUserName] = useState<string>("")
@@ -16,7 +16,7 @@ function App() {
   const [currentMessage, setcurrentMessage] = useState<string>("")
   //@ts-ignore
   useEffect(() => {
-    const newSocket = io(`http://localhost:3000`);
+    const newSocket = io(hostname);
     setUserName(rug.generate())
     setSocket(newSocket);
     return () => newSocket.close();
