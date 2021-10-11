@@ -8,7 +8,7 @@ type UserMessage = {
   message: string,
   userName: string
 }
-const {BACKEND_HOST} = process.env
+const {REACT_APP_BACKEND_HOST} = process.env
 function App() {
   const [socket, setSocket] = useState<any>(null);
   const [userName, setUserName] = useState<string>("")
