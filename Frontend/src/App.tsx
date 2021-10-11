@@ -8,7 +8,7 @@ type UserMessage = {
   message: string,
   userName: string
 }
-const {REACT_APP_BACKEND_HOST} = process.env
+const { REACT_APP_BACKEND_HOST } = process.env
 function App() {
   const [socket, setSocket] = useState<any>(null);
   const [userName, setUserName] = useState<string>("")
@@ -36,14 +36,16 @@ function App() {
   }
   function handleForm(e: any) {
     e.preventDefault();
-    let userMessage: UserMessage = {
-      userName: userName,
-      message: currentMessage
+    if (currentMessage && currentMessage !== "") {
+      let userMessage: UserMessage = {
+        userName: userName,
+        message: currentMessage
+      }
+      socket.emit("message", userMessage)
+      setMessage([...message.slice(-10), userMessage])
+      setcurrentMessage("")
+      e.target.value = null;
     }
-    socket.emit("message", userMessage)
-    setMessage([...message.slice(-10), userMessage])
-    setcurrentMessage("")
-    e.target.value = null;
   }
   return (
     <section>
