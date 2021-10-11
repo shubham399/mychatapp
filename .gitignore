@@ -1,5 +1,5 @@
-Frontend/public/**
-
+Frontend/build/**
+Backend/build/**
 # Logs
 logs
 *.log
