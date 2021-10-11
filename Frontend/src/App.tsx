@@ -4,9 +4,6 @@ import Message from './Components/Message'
 //@ts-ignore
 import * as rug from 'random-username-generator'
 
-const selfMessage = "d-flex flex-row justify-content-end mb-4"
-const otherMessage = "d-flex flex-row justify-content-start mb-4"
-
 type UserMessage = {
   message: string,
   userName: string
@@ -57,8 +54,8 @@ function App() {
             <div className="card" id="chat1">
               <div className="card-body">
                 {message.map(m => {
-                  let css = m.userName === userName ? selfMessage : otherMessage
-                  return (<Message css={css} message={m.message} />)
+                  let css = m.userName === userName
+                  return (<Message align={css} message={m.message} userName={m.userName} />)
                 })}
                 {/* <Message css={selfMessage} message="I Sent this" /> */}
                 <div className="form-outline" >
