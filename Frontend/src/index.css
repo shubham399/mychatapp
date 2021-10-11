@@ -1,0 +1,23 @@
+body {
+    background: rgb(27, 24, 24) !important;
+}
+
+div {
+    background: rgb(27, 24, 24) !important;
+}
+
+.card * {
+    background: rgb(37, 32, 32) !important;
+}
+
+.cardboard * {
+    background: rgb(49, 43, 43) !important;
+}
+
+p {
+    color: white !important;
+}
+
+input {
+    color: white !important;
+}

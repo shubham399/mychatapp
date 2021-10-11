@@ -3,8 +3,8 @@ type MessageProp = {
     message: string,
     userName: string
 }
-const selfMessage = "d-flex flex-row justify-content-end mb-4"
-const otherMessage = "d-flex flex-row justify-content-start mb-4"
+const selfMessage = "d-flex flex-row justify-content-end mb-4 cardboard"
+const otherMessage = "d-flex flex-row justify-content-start mb-4 cardboard"
 function Message(props: MessageProp) {
     let style = {
         // position: "absolute",
