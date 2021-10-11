@@ -30,6 +30,9 @@ io.on("connection", function (socket: any) {
         console.log("Got Message", message);
         socket.broadcast.to("general").emit("message", message)
     });
+    socket.on('disconnect', function () {
+        socket.emit("message", { message: "A User Left the Room", "userName": "admin" })
+    })
 });
 
 
