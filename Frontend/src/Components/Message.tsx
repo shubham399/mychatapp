@@ -2,8 +2,7 @@ type MessageProp = {
     align: boolean,
     message: string,
     userName: string,
-    timeStamp?: Date,
-    key: string
+    timeStamp?: Date
 }
 const selfMessage = "d-flex flex-row justify-content-end mb-4 cardboard"
 const otherMessage = "d-flex flex-row justify-content-start mb-4 cardboard"
@@ -18,7 +17,7 @@ function Message(props: MessageProp) {
     }
     let css = props.align ? selfMessage : otherMessage
     if (props.align) {
-        return (<div key={props.key} className={css} >
+        return (<div className={css} >
             <div className="p-3 ms-3 border">
                 <p className="small mb-0">{props.message}</p>
             </div>
