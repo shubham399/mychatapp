@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import { v4 as uuidv4 } from 'uuid';
 import Message from './Components/Message'
 //@ts-ignore
 import * as rug from 'random-username-generator'
 
 type UserMessage = {
+  id: string,
   message: string,
-  userName: string
+  userName: string,
+  timeStamp: Date
 }
 const { REACT_APP_BACKEND_HOST } = process.env
 function App() {
@@ -38,8 +41,10 @@ function App() {
     e.preventDefault();
     if (currentMessage && currentMessage !== "") {
       let userMessage: UserMessage = {
+        id: uuidv4(),
         userName: userName,
-        message: currentMessage
+        message: currentMessage,
+        timeStamp: new Date()
       }
       socket.emit("message", userMessage)
       setMessage([...message.slice(-10), userMessage])
@@ -58,7 +63,7 @@ function App() {
               <div className="card-body overflow-auto">
                 {message.map(m => {
                   let css = m.userName === userName
-                  return (<Message align={css} message={m.message} userName={m.userName} />)
+                  return (<Message key={m.id} align={css} message={m.message} userName={m.userName} />)
                 })}
                 {/* <Message css={selfMessage} message="I Sent this" /> */}
                 <div className="form-outline" >
