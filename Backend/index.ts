@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import * as SocketIO from 'socket.io';
 var cors = require('cors')
 const app = express();
+import { v4 as uuidv4 } from 'uuid';
 const server = require('http').Server(app);
 app.use(cors())
 let io = new SocketIO.Server(server, {
@@ -12,7 +13,9 @@ let io = new SocketIO.Server(server, {
 const PORT = process.env.PORT || 3000;
 type UserMessage = {
     message: string,
-    userName: string
+    userName: string,
+    timeStamp: Date,
+    id: string
 }
 
 
@@ -24,7 +27,7 @@ io.on("connection", function (socket: any) {
     //  socket.broadcast.to(user.room)
     console.log("a user connected");
     socket.join("general")
-    socket.broadcast.to("general").emit("message", { message: "A New User Joined the Room", "userName": "admin" })
+    socket.broadcast.to("general").emit("message", { id: uuidv4(),message: "A New User Joined the Room", "userName": "admin", timeStamp: new Date() })
     // whenever we receive a 'message' we log it out
     socket.on("message", function (message: UserMessage) {
         console.log("Got Message", message);
