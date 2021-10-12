@@ -28,7 +28,7 @@ function Message(props: MessageProp) {
         )
     }
     else {
-        return (<div key={props.key} className={css} >
+        return (<div className={css} >
             <div style={style} className="rounded-circle p-3 ms-3 border">
                 <p className="small mb-0" >{props.userName}</p>
             </div>
